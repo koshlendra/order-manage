@@ -1,0 +1,25 @@
+<div class="showcutomer">
+<h2>Name: <%=@customer.name%><td><%=@customer.last_name%></h2>
+Phone:<%=@customer.phone%>
+
+
+
+
+
+<table border="1" class="table table-striped">
+
+<th>Phone</th>
+<th>City</th>
+<th>Country</th>
+<th>Pincode</th>
+<th>Address</th>
+<tr>
+<td><%=@customer.phone%></td>
+<% @customer.addresses.each do |add|%>
+<td><%=add.city%></td>
+<td><%=add.country%></td>
+<td><%=add.pincode%></td>
+<td><%=add.address%></td><%end%></table>
+</tr>
+
+</div>

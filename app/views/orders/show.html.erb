@@ -1,0 +1,45 @@
+<div class="showcutomer">
+<h2>order _id: <%=@Order.id%></h2><br>
+
+
+<h4>customer name : <%=@Order.customer.name%></h4>
+
+<table border="1" class="table table-striped">
+<th>Phone</th>
+<th>City</th>
+<th>Country</th>
+<th>Pincode</th>
+<th>Address</th>
+<tr>
+
+<td><%=@Order.customer.phone%></td>
+<td><%=@Order.address.city%></td>
+<td><%=@Order.address.country%></td>
+<td><%=@Order.address.pincode%></td>
+<td><%=@Order.address.address%></td></table>
+</tr>
+<h2>Product</h2>
+<%@Order.products_orders.each do |product|%>
+
+<table border="1" class="table table-striped">
+
+
+<th>name</th>
+<th>product_id</th>
+<th>price</th>
+<th>quantity</th>
+<th>total_price</th>
+
+<tr>
+
+<td><%= product.product.name%></td>
+<td><%= product.product_id%></td>
+<td><%= product.price%></td>
+<td><%= product.quantity%></td>
+<td><%= product.total_price%></td>
+</tr>
+</table>
+<%end%>
+
+
+</div> 

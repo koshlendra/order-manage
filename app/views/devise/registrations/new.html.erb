@@ -1,0 +1,143 @@
+
+<div class="sign">
+<h2>Sign up ........</h2><br>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }) do |f| %>
+ 
+  <div class="row">
+     <div class='field'>
+     <div class="col-md-1">
+          <%= f.label :first_name %>:
+          </div>
+          <div class="col-md-4 input-sm">
+             <%= f.text_field :first_name, autofocus: true ,:class => 'form-control'%>
+             </div>
+              <div class="col-md-4"> <%= resource.errors.full_messages.first if resource.errors.any? %></div>
+     </div>
+  </div><br> 
+  <div class="row">
+     <div class='field'>
+     <div class="col-md-1">
+         <%= f.label :last_name %>:
+          </div>
+          
+          <div class="col-md-4 input-sm">
+             <%= f.text_field :last_name,:class => 'form-control'%>
+          </div> <div class="col-md-4"> <%= resource.errors.full_messages.at(1) if resource.errors.any? %></div>
+     </div>
+  </div><br>
+  <div class="row">
+     <div class='field'>
+     <div class="col-md-1">
+          <%= f.label :email %>:
+          </div>
+            
+          <div class="col-md-4 input-sm">
+              <%= f.email_field :email ,:class => 'form-control'%>
+          </div>
+           <div class="col-md-4"> <%= resource.errors.full_messages.at(9) if resource.errors.any? %></div>
+     </div>
+  </div><br>
+  
+  
+  <div class="row">
+    <div class="field">
+    <div class="col-md-1">
+           <%= f.label :password %> :
+           <% if @validatable %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+           <% end %>
+          </div>
+              
+             <div class="col-md-4 input-sm">
+                <%= f.password_field :password, autocomplete: "off",:class => 'form-control' %>
+             </div> <div class="col-md-4"> <%= resource.errors.full_messages.at(10) if resource.errors.any? %></div>
+     </div>
+  </div><br>
+
+<div class="row">
+     <div class='field'>
+     <div class="col-md-1">
+         <%= f.label :password_confirmation %>:
+          </div>
+         
+          <div class="col-md-4 input-sm">
+             <%= f.password_field :password_confirmation, autocomplete: "off" ,:class => 'form-control'%>
+          </div>
+     </div>
+  </div><br>
+  <div class="row">
+     <div class='field'>
+     <div class="col-md-1">
+         <%= f.label :city %>:
+          </div>
+          
+          <div class="col-md-4 input-sm">
+             <%= f.text_field :city,:class => 'form-control'%>
+          </div>
+           <div class="col-md-4"> <%= resource.errors.full_messages.at(2) if resource.errors.any? %></div>
+     </div>
+  </div><br>
+  <div class="row">
+     <div class='field'>
+     <div class="col-md-1">
+         <%= f.label :address %>:
+          </div>
+          
+          <div class="col-md-4 input-sm">
+             <%= f.text_field :address,:class => 'form-control'%>
+          </div>
+           <div class="col-md-4"> <%= resource.errors.full_messages.at(3) if resource.errors.any? %></div>
+     </div>
+  </div><br>
+  <div class="row">
+     <div class='field'>
+     <div class="col-md-1">
+         <%= f.label :phone %>:
+          </div>
+          
+          <div class="col-md-4 input-sm">
+             <%= f.text_field :phone,:class => 'form-control'%>
+          </div> <div class="col-md-4"> <%= resource.errors.full_messages.at(6) if resource.errors.any? %></div>
+           <div class="col-md-4"> <%= resource.errors.full_messages.at(4) if resource.errors.any? %></div>
+            <div class="col-md-4"> <%= resource.errors.full_messages.at(5) if resource.errors.any? %></div>
+     </div>
+  </div><br>
+  <div class="row">
+     <div class='field'>
+     <div class="col-md-1">
+         <%= f.label :pincode %>:
+          </div>
+          
+          <div class="col-md-4 input-sm">
+             <%= f.text_field :pincode,:class => 'form-control'%>
+          </div>
+           <div class="col-md-4"> <%= resource.errors.full_messages.at(7) if resource.errors.any? %></div> 
+           <div class="col-md-4"> <%= resource.errors.full_messages.at(8) if resource.errors.any? %></div>
+     </div>
+  </div><br>
+ <div class="row">
+     <div class='field'>
+     <div class="col-md-1">
+         <%= f.label :image %>:
+          </div>
+          
+          <div class="col-md-4 input-sm">
+            <%= f.file_field :avatar %>
+          </div>
+     </div>
+  </div><br>
+<div class="row">
+  <div class="signbottun">
+     <div class="actions">
+       <%= f.submit "Sign up", :class => 'btn btn-success' %>
+      </div>
+   </div>
+</div> <br>
+
+<% end %>
+<div class="row">
+<div class="loginbottun">
+<%= render "devise/shared/links" %>
+
+</div></div></div>

@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20150429093032_addlock1_to_user.rb

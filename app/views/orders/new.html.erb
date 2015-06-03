@@ -1,0 +1,136 @@
+
+
+<div class="newproduct">
+<%= nested_form_for @order ,url: orders_path do |f|%>
+   <%= f.label :customer %>
+   <%= f.select :customer_id, options_from_collection_for_select(Customer.all,:id, :name), {include_blank: '- select customer -'}%>
+ <div class='address'>
+     
+     <div class="row">
+      <div class="col-md-1">
+       <h5>Customer_id:</h5> 
+          </div>
+          <div class="col-md-4 input-sm">
+             <%= text_field :address, :customer_id ,:class => 'form-control',:disabled => true %>
+          </div>
+       </div><br>
+
+     
+     <div class="row">
+      <div class="col-md-1">
+          <h5>Country :</h5>
+          </div>
+          <div class="col-md-4 input-sm">
+             <%= text_field :address, :country ,:class => 'form-control'%>
+          </div>
+     </div><br>
+     
+     <div class="row">
+          <div class="col-md-1">
+            <h5>Address :</h5> 
+          </div>
+          <div class="col-md-4 input-sm">
+             <%= text_field :address, :address ,:class => 'form-control'%>
+          </div>
+     </div><br>
+      
+     <div class="row">
+          <div class="col-md-1">
+            <h5>Address :</h5>
+          </div>
+          <div class="col-md-4 input-sm">
+             <%= text_field :address, :address_id ,:class => 'form-control'%>
+          </div>
+    </div><br>
+     <div class="row">
+          <div class="col-md-1">
+            <h5>City :</h5>
+          </div>
+          <div class="col-md-4 input-sm">
+             <%= text_field :address, :city ,:class => 'form-control'%>
+          </div>
+    </div><br>
+
+    <div class="row">
+        <div class="col-md-1">
+           <h5>Pincode :</h5>        
+        </div>
+          <div class="col-md-4 input-sm">
+             <%= text_field :address, :pincode ,:class => 'form-control'%>
+          </div>
+   </div><br>
+         
+
+
+
+
+
+
+  
+
+
+ <%= f.fields_for :products_orders  do |products_orders_form| %>
+        <%= products_orders_form.select :product_id, options_from_collection_for_select(Product.all,:id, :name), { include_blank: '- select product -'}, {class: 'order_product'} %>
+          
+        <%= products_orders_form.text_field :quantity, class: 'product_quantity '%>
+    
+        <%= products_orders_form.text_field :price, class: 'price ',:disabled => true %>
+       
+        <%= products_orders_form.text_field :total_price,class: 'total '%>
+  
+        <%= products_orders_form.link_to_remove "Remove this product" ,:class => 'btn btn-info'%>
+      
+ 
+  <% end %>
+
+  <%= f.link_to_add "Add a product", :products_orders,:class => 'btn btn-info' %>
+
+  <%=f.submit :class => 'btn btn-success'%>
+   <%end%>
+
+</div>
+
+
+
+
+<script type="text/javascript">  
+
+  $(document).ready(function(){
+  
+  $('#order_customer_id').change(function(){
+     
+      $.ajax({
+       url: "/orders/"+$(this).val()+"/customer_address",
+      type: 'get',
+    }); 
+    
+  });
+
+$(document).on("change", ".order_product", function() {
+    selected_prod_id = $(this).attr('id').split("_");
+    selected_prod_id.pop();
+     selected_prod_id.pop();
+    selected_prod_id_hash = selected_prod_id.pop();
+   $.ajax({
+      url: "/orders/"+$(this).val()+"/product_detail?id_hash="+selected_prod_id_hash,
+      type: 'get',
+    }); 
+});
+
+
+$(document).on("keyup", ".product_quantity", function() {
+  selected_prod_id = $(this).attr('id').split("_");
+  selected_prod_id.pop();
+  prd_id_hash = selected_prod_id.pop();
+    var val1 = $(this).val();
+    var val2 = $("#order_products_orders_attributes_"+prd_id_hash+"_price").val();
+    var total = val1 * val2; 
+    
+    $("#order_products_orders_attributes_"+prd_id_hash+"_total_price").val(total);
+    
+});
+});
+
+</script>
+
+

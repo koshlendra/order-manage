@@ -1,0 +1,67 @@
+<div  class="newproduct">
+<h3>Create Product!!!!!</h3>
+<%= form_for @product, url: products_path do |f| %>
+<div class="row">
+     <div class='field'>
+     <div class="col-md-1">
+          <%= f.label :name %>:
+          </div>
+          <div class="col-md-4 input-sm">
+             <%= f.text_field :name, autofocus: true ,:class => 'form-control'%>
+          </div>
+     </div>
+  </div><br><div class="row">
+     <div class='field'>
+     <div class="col-md-1">
+          <%= f.label :price %>:
+          </div>
+          <div class="col-md-4 input-sm">
+             <%= f.text_field :price,:class => 'form-control'%>
+          </div>
+     </div>
+  </div><br>
+
+<div class="row">
+     <div class='field'>
+     <div class="col-md-1">
+          <%= f.label :brand %>:
+          </div>
+          <div class="col-md-4 input-sm">
+             <%= f.text_field :brand,:class => 'form-control'%>
+          </div>
+     </div>
+  </div><br>
+<div class="row">
+  <div class='field'>
+  <div class="col-md-1">
+    <%= f.label :color %>:
+  </div>
+      <div class="col-md-4 input-sm">
+         <%= f.text_field :color,:class => 'form-control colorpicker' %>
+       </div>
+       </div> </div><br>
+<div class="row">
+     <div class='field'>
+     <div class="col-md-1">
+          <%= f.label :quantity %>:
+          </div>
+          <div class="col-md-4 input-sm">
+             <%= f.text_field :quantity,:class => 'form-control'%>
+          </div>
+     </div>
+  </div><br>
+<div class="row">
+  <div class="signbottun">
+     <div class="actions">
+       <%= f.submit "Create product", :class => 'btn btn-success' %>
+      </div>
+   </div>
+</div> <br>
+<%end%>
+</div>
+<script type="text/javascript">        
+  $(document).ready(function()
+  {
+    $('.colorpicker').colorpicker('place');
+  });
+</script>
