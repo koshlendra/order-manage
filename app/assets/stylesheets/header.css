@@ -1,15 +1,24 @@
+
+.header nav{background:none;border:none;}
+.btn-shift{float:left;}
 .navimage
 {
 margin-bottom: 150px;
 
 
 }
-.bottun
+.header nav .bottun
 {
 	
 padding-top: 5px;
-margin-left: 1000px;
+
+
 }
+
+.header nav .bottun .btn-link{float:right;}
+
+
+
 .form
 {
  margin-left: 1000px
@@ -17,7 +26,7 @@ margin-left: 1000px;
 }
 .header
 {
-	padding-top: 10px;
+	padding-top: 10px;background:#f8f8f8;
 }
 .sign
 {
