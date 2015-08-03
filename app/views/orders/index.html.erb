@@ -1,38 +1,66 @@
 <h2>Order list.....</h2>
 <div class="createcustomer">
-<%=link_to "Add New Order", new_order_path,:class => 'btn btn-info'%>
+	<%=link_to "Add New Order", new_order_path,:class => 'btn btn-info'%>
 </div>
 <table border="1" class="table table-striped">
-<tr rowspan="2" class="danger">
-<th>S.No.</th>
-<th>Customer_id</th>
-<th>Product_id</th>
-<th>Placing Date</th>
-<th colspan="3"><center>Address</center>
-</th>
-<th colspan="3"><center>Opration</center></th>
-</tr>
-<%@order.each do |order|%>
-<tr>
-<td><%=order.id%></td>
-<td><%=order.customer_id%></td>
+	<tr rowspan="2" class="danger">
+	<th>S.No.</th>
+	<th>Customer_id</th>
+	<th>Product_id</th>
+	<th>Placing Date</th>
+	<th colspan="3"><center>Address</center>
+    </th>
+	<th colspan="3"><center>Opration</center></th>
+	</tr>
+<%=Customer.find_by_id(@order.group_by(&:customer_id).values.max_by(&:size).try(:first).try(:customer_id)).try(:name)%>
+<tbody id="sortable">
+   <%@order.each do |order|%>
+	<tr id='<%= order.id %>' class="thumbSortable">
+		<td><%=order.id%></td>
+		<td><%=order.customer_id%></td>
 
-<td>
-<%order.products_orders.each do |add|%>
-<%=add.product_id%>,<%end%></td>
+		<td>
+		<%order.products_orders.each do |add|%>
+		<%=add.product_id%>,<%end%></td>
 
-<td><%=order.created_at.to_date%></td>
-<td><%=order.address.city%></td>
-<td><%=order.address.address%></td>
-<td><%=order.address.country%></td>
+		<td><%=order.created_at.to_date%></td>
+		<td><%=order.address.city%></td>
+		<td><%=order.address.address%></td>
+		<td><%=order.address.country%></td>
 
-<td><%=link_to"",order_path(order.id),:class=>"glyphicon glyphicon-eye-open"%></td> 
-<td><%=link_to"",edit_order_path(order.id),:class=>"glyphicon glyphicon glyphicon-edit"%></td>
-    
-     
-<td><%=link_to"",order_path(order.id),method: :delete,:class=>"glyphicon glyphicon-trash"%></td>
-</tr>
+		<td><%=link_to"",order_path(order.id),:class=>"glyphicon glyphicon-eye-open"%></td> 
+		<td><%=link_to"",edit_order_path(order.id),:class=>"glyphicon glyphicon glyphicon-edit"%></td>
+		    
+		     
+		<td><%=link_to"",order_path(order.id),method: :delete,:class=>"glyphicon glyphicon-trash"%></td>
+	</tr>
 <%end%>
-
+</tbody>
 </table>
 <div class="paginate"> <%= paginate @order %></div>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    projectBorad();
+   
+  });
+
+  function projectBorad() {
+    $("#sortable").sortable({
+      connectWith: ".thumbSortable",
+      update: function(event, ui){
+        ordering = [];
+        $('.thumbSortable').each(function(i,e){
+        ordering.push($(e).attr('id'));
+      });
+        $.ajax({
+          url: '/orders/sort',
+          data: {'uploads': ordering},
+          type: "post"
+          }).done(function() {
+        });
+      }
+    }).disableSelection();
+  }
+  </script>

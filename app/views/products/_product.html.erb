@@ -1,0 +1,22 @@
+
+
+  <td><%=product.id%></td>
+  <td><%=product.name%></td>
+  <td><%=product.price%>$</td>
+  <td><%=product.brand%></td>
+  <td><div style="background:<%=product.color%>;height:22px;width:100px;position:absolute;"></div></td>
+
+
+  <td><%=product.quantity%></td>
+
+    
+  <td><%=link_to"",product_path(product.id),:class=>"glyphicon glyphicon-eye-open"%>
+
+  </td>
+   
+  <td>
+  <%=link_to "",edit_product_path(product.id),remote: true,:class=>"glyphicon glyphicon glyphicon-edit "%></td>
+  <td><%=link_to"",product_path(product.id),method: :delete,:class=>"glyphicon glyphicon-trash"%></td>
+
+
+

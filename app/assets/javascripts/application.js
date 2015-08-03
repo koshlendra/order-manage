@@ -12,9 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require twitter/bootstrap
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap-colorpicker
 //= require jquery_nested_form
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require select2
+//= require jquery-ui
 //= require_tree .

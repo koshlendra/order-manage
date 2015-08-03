@@ -1,12 +1,12 @@
 class OrdersController < ApplicationController
 
 	def index
-      @order = Order.all.page params[:page]	
+      @order = Order.where("user_id = ?",current_user.id).order(:position).page params[:page]	
 	end
 
 	def new
 	  @order = Order.new
-	@order.products_orders.build
+	  @order.products_orders.build
     end
 
 	def customer_address
@@ -20,9 +20,9 @@ class OrdersController < ApplicationController
     
 	def create
 	   @order = Order.new(order_params)
+	   @order.user_id = current_user.id
     if @order.save
-       @address = Address.new(address)         
-                  
+       @address = Address.new(address) 
        @address.save
        id  = @address.id
        @order1 = Order.last
@@ -35,9 +35,19 @@ class OrdersController < ApplicationController
 	def address
 		 params.require(:address).permit(:customer_id,:country,:city,:address,:pincode)
 	end
-	
+	def sort
+		i=0
+		params[:uploads].each do |id|
+     order=Order.find(id)
+     order.position = i+1
+     order.save
+      i= i+1
+		end
+    render :nothing => true
+	end
+
 	def show
-		@Order=Order.find(params[:id])
+		@order=Order.find(params[:id])
 	end
 	def edit
 		
@@ -52,7 +62,6 @@ class OrdersController < ApplicationController
 	end
 	def order_params
         params.require(:order).permit(:customer_id,:address_id ,:product_ids => [],products_orders_attributes:[:product_id,:customer_id,:quantity,:price, :total_price])
-
 	end
 	
 end

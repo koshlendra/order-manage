@@ -1,0 +1,2 @@
+$('#myModal').modal('hide');
+$("#row_<%=params[:id]%>").html('$("<%= j render(:partial => '/products/product', :locals => {:product => @product}) %>")');

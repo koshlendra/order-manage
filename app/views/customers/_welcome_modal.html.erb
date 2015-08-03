@@ -1,0 +1,54 @@
+<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="imagePreviewLabel">Enter email for the update </h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inactive-user-email">Email:</label>
+          <input type="text" class="form-control input-sm" id="inactive-user-email">
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inactive-user-email">PASS:</label>
+          <input type="text" class="form-control input-sm" id="inactive-user-password">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= button_tag "Send", :data => { url:registration_path(current_user),'email' =>current_user.email  }, class: "btn tip email", title: "Email update" %>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+   $('#emailModal').modal('show');
+    
+  });
+
+$('.email').click(function(e){
+        e.preventDefault();
+        var request_url = $(this).data("url");
+       //  var email = $(this).data('email');
+         var email= $('#inactive-user-email').val()
+         var pass = $("#inactive-user-password").val()
+         alert(request_url);
+         alert(pass);
+         console.log(request_url);
+          $.ajax({
+              url: request_url,
+              type: "PUT",
+              data: { email: email,current_password: pass },
+              dataType: "html",
+              success: function(data){
+                $('#inactive-user-email').val('');
+                if(confirm("Update your email")){
+                  location.reload();
+                }
+              }
+          });
+     });
+</script>

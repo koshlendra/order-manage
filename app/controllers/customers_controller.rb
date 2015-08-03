@@ -1,21 +1,25 @@
 class CustomersController < ApplicationController
-	
+
     load_and_authorize_resource
-
+    
 	def index
-		@customer = Customer.all.page params[:page]
-		
-
+	  @user = session[:userinfo]
+	  @customer = Customer.all.page params[:page]
 	end
 	def new
-  		@customer.addresses.build
+  	  @customer.addresses.build
 	end
+	
+	  def move
+	    @thing = Thing.find(params[:id])
+	    @thing.move_to! params[:position]
+	  end
 	def create
-		if @customer.save
+	  if @customer.save
 	  	redirect_to customers_path
-    else
-   	   render 'new'
-    end
+      else
+   	    render 'new'
+      end
 	end
 	def show
 	

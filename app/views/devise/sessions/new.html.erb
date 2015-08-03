@@ -1,12 +1,10 @@
-    <div class="form">
-  <div class="row">
-   <h3 >Log in</h3>
-   </div>
-
-<%= form_for(resource, as: resource_name,url: session_path(resource_name)) do |f| %>
+<div class="form">
+  <div class="container">
+    <h3 >Log in</h3>
+    <%= form_for(resource, as: resource_name,url: session_path(resource_name)) do |f| %>
 
 <div class="form-group">
-<div class="row">
+
   <div class="field">
        <%= f.label :email %><br />
      <div class="input-group col-md-8">
@@ -14,9 +12,9 @@
          <%= f.email_field :email, autofocus: true,:class => 'form-control ' %>
       </div>
   </div>
-  </div>
+  
 
-<div class="row">
+
 
   <div class="field">
    <%= f.label :password %><br />
@@ -26,25 +24,56 @@
       </div>
   </div>
 </div>
-</div>  
-<div class="row">
+
+
   <% if devise_mapping.rememberable? -%>
     <div class="field">
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>
   <% end -%>
-  </div>
-<div class="row">
+  
+
   <div class="actions">
     <%= f.submit "Log in" ,:class => 'btn btn-primary btn-lg'%>
   </div>
 <% end %>
-</div>
-<div class="row">
+
+
 <br>
-</div>
 <div class="row">
+ <div class="btnss col-md-12">
+
 <%= render "devise/shared/links" %>
 </div>
 </div>
+</div>
+
+<script src="https://cdn.auth0.com/js/lock-7.5.min.js"></script>
+<script type="text/javascript">
+  
+  var lock = new Auth0Lock('3mDOOjegvdMOF0hYHNxj5Ry3Xi2ATK58', 'order-management1.auth0.com');
+  
+  
+  function signin() {
+    lock.show({
+        callbackURL: 'http://localhost:3000/auth/auth0/callback'
+      , responseType: 'code'
+      , authParams: {
+        scope: 'openid profile'
+      }
+    });
+  }
+</script>
+<button onclick="signin()">Login</button>
+
+
+
+
+
+
+
+
+
+
+

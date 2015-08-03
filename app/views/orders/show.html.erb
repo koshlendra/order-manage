@@ -1,8 +1,9 @@
 <div class="showcutomer">
-<h2>order _id: <%=@Order.id%></h2><br>
+
+<h2>order _id: <%=@order.id%></h2><br>
 
 
-<h4>customer name : <%=@Order.customer.name%></h4>
+<h4>customer name : <%=@order.customer.name%></h4>
 
 <table border="1" class="table table-striped">
 <th>Phone</th>
@@ -12,14 +13,14 @@
 <th>Address</th>
 <tr>
 
-<td><%=@Order.customer.phone%></td>
-<td><%=@Order.address.city%></td>
-<td><%=@Order.address.country%></td>
-<td><%=@Order.address.pincode%></td>
-<td><%=@Order.address.address%></td></table>
+<td><%=@order.customer.phone%></td>
+<td><%=@order.address.city%></td>
+<td><%=@order.address.country%></td>
+<td><%=@order.address.pincode%></td>
+<td><%=@order.address.address%></td></table>
 </tr>
 <h2>Product</h2>
-<%@Order.products_orders.each do |product|%>
+<%@order.products_orders.each do |product|%>
 
 <table border="1" class="table table-striped">
 

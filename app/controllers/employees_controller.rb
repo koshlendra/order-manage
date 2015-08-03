@@ -2,7 +2,6 @@ class EmployeesController < ApplicationController
 	
    load_and_authorize_resource :user ,:parent => false
 
-
 	 def index
         @users = User.all.page params[:page]
      end
@@ -24,7 +23,6 @@ class EmployeesController < ApplicationController
 
 	end
 	def update
-		
 		@user.update!(user_params)
 		redirect_to employees_path
 		

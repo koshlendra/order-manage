@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601064504) do
+ActiveRecord::Schema.define(version: 20150730121840) do
 
   create_table "addresses", force: true do |t|
     t.integer  "customer_id"
@@ -32,7 +32,11 @@ ActiveRecord::Schema.define(version: 20150601064504) do
     t.string   "last_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "order_count", default: 0
+    t.integer  "position",    default: 0
   end
+
+  add_index "customers", ["position"], name: "index_customers_on_position", using: :btree
 
   create_table "employees", force: true do |t|
     t.string   "name"
@@ -55,6 +59,8 @@ ActiveRecord::Schema.define(version: 20150601064504) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "address_id"
+    t.integer  "user_id"
+    t.integer  "position",    default: 0
   end
 
   create_table "products", force: true do |t|
@@ -131,6 +137,8 @@ ActiveRecord::Schema.define(version: 20150601064504) do
     t.integer  "failed_attempts"
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.string   "uid"
+    t.string   "provider"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

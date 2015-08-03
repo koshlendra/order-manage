@@ -1,34 +1,68 @@
-<h2>Customer list.....</h2>
-<div class="createcustomer">
-<%=link_to "Add New Customer", new_customer_path,:class => 'btn btn-info'%>
-</div>
-<table border="1" class="table table-striped">
-<tr class="danger">
-<th>S.No.</th>
-<th>Name</th>
-<th>Email</th>
-<th>Phone</th>
-<th ><center>Address</center></th>
-<th colspan="3"><center>Opration</center></th>
-</tr>
-<%@customer.each do |customer|%>
-<tr>
-<td><%=customer.id%></td>
-<td><%=customer.name%></td>
-<td><%=customer.email%></td>
-<td><%=customer.phone%></td>
-<td>
-<% customer.addresses.each do |add|%>
-<%=add.city%><%end%></td>
-
-<td><%=link_to"",customer_path(customer.id),:class=>"glyphicon glyphicon-eye-open"%></td> <% if can? :update, @customer %>
-<td><%=link_to"",edit_customer_path(customer.id),:class=>"glyphicon glyphicon glyphicon-edit"%></td>
+<div class="container">
+  <h2>Customer list.....</h2>
+  <div class="createcustomer">
+    <%=link_to "Add New Customer", new_customer_path,:class => 'btn btn-info'%>
+  </div>
+  <%#if current_user.email%>
+    <%#= render 'welcome_modal' %>
+  <%#end%>
+  <h2><%=@customer.where(order_count: Customer.maximum(:order_count)).first.name%></h2>
+ 
+  <table border="1" class="table table-striped managed-table " >
+  <thead>
+    <tr class="danger">
+      <th>S.No.</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th ><center>Address</center></th>
+      <th colspan="3" class="text-holder"><center>Opration</center></th>
+    </tr>
+    </thead>
+    <tbody >
+    <%@customer.each do |customer|%>
+      <tr >
+        <td><%=customer.id%></td>
+        <td><%=customer.name%></td>
+        <td><%=customer.email%></td>
+        <td><%=customer.phone%></td>
+        <td>
+          <% customer.addresses.each do |add|%>
+            <%=add.city%>
+          <%end%>
+        </td>
+        <td><%=link_to"",customer_path(customer.id),:class=>"glyphicon glyphicon-eye-open"%></td> 
+        <% if can? :update, @customer %>
+          <td><%=link_to"",edit_customer_path(customer.id),:class=>"glyphicon glyphicon glyphicon-edit"%></td>
+        <%end%>
+        <% if can? :destroy, @customer %>
+          <td>
+            <%=link_to"",customer_path(customer.id),method: :delete,:class=>"glyphicon glyphicon-trash"%>
+          </td>
+        <%end%>
+      </tr>
+      </tbody>
     <%end%>
-     <% if can? :destroy, @customer %>
-<td><%=link_to"",customer_path(customer.id),method: :delete,:class=>"glyphicon glyphicon-trash"%></td><%end%>
-</tr>
-<%end%>
-</table>
-<div class="paginate">
-<%= paginate @customer %>
+  </table>
+  <div class="paginate">
+    <%= paginate @customer %>
+  </div>
 </div>
+<script>
+$(document).ready(function(){
+  projectBorad()
+   $('.managed-table').DataTable({
+     
+      "aoColumns": [
+        {"bSortable": true ,"aTargets": [5]},
+             null,
+             null,
+             null,
+             null,
+             null 
+       ]  
+    });    
+  });
+
+
+   </script>

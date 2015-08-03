@@ -21,7 +21,7 @@ padding-top: 5px;
 
 .form
 {
- margin-left: 1000px
+
 
 }
 .header
@@ -34,9 +34,11 @@ padding-top: 5px;
 }
 .signbottun
 {
-margin-left: 130px;
+
 
 }
+.newcustomer
+{float:none}
 .loginbottun
 {
 	margin-left: 150px;
@@ -45,17 +47,14 @@ margin-left: 130px;
 {
 	margin-left: 50px;
 }
-.newcustomer
-{
-	margin-left: 20px;
-}
+
 .newproduct
 {
 	margin-left: 20px;
 }
 .createcustomer 
 {
-	margin-left: 1100px;
+	float: right;
 	margin-bottom: 10px;
 }
 .createproduct
@@ -78,4 +77,15 @@ margin-left: 130px;
 {
 	margin-left: 1100px;
 	margin-bottom: 10px;
+}
+
+.newcustomer form{width: 50%;margin: 0 auto;}
+.newcustomer h3{text-align: center;}
+
+@media screen and (max-width: 767px){
+
+.newcustomer form{width:100%; padding: 0px 15px;}
+
+.header nav .bottun .btn-shift{float: none;}
+
 }

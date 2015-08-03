@@ -1,9 +1,7 @@
-
-
 <div class="newproduct">
-<%= nested_form_for @order ,url: orders_path do |f|%>
-   <%= f.label :customer %>
-   <%= f.select :customer_id, options_from_collection_for_select(Customer.all,:id, :name), {include_blank: '- select customer -'}%>
+ <%= nested_form_for @order ,url: orders_path do |f|%>
+    <%= f.label :customer %>
+    <%= f.select :customer_id, options_from_collection_for_select(Customer.all,:id, :name), {include_blank: '- select customer -'} ,:class=> "e1"%>
  <div class='address'>
      
      <div class="row">
@@ -62,15 +60,8 @@
          
 
 
-
-
-
-
-  
-
-
- <%= f.fields_for :products_orders  do |products_orders_form| %>
-        <%= products_orders_form.select :product_id, options_from_collection_for_select(Product.all,:id, :name), { include_blank: '- select product -'}, {class: 'order_product'} %>
+   <%= f.fields_for :products_orders  do |products_orders_form| %>
+        <%= products_orders_form.select :product_id, options_from_collection_for_select(Product.all,:id, :name), { include_blank: '- select product -'}, {class: 'order_product, e1'} %>
           
         <%= products_orders_form.text_field :quantity, class: 'product_quantity '%>
     
@@ -130,6 +121,10 @@ $(document).on("keyup", ".product_quantity", function() {
     
 });
 });
+
+$(document).ready(function() { $(".e1").select2({
+        placeholder: "Tags...",
+        width: "100px",}); });
 
 </script>
 

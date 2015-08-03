@@ -1,0 +1,9 @@
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider(
+    :auth0,
+    "EqBmrHxMUd0TXmNZZ0X8wk5HiLyYoLV6",
+    "GLAf2aGV7_PfQ5v-6PwWJP8OGCbquLKUVKzBWgnvzn79rrNAZSBGXGT4hToXrUlL",
+    "order-management.auth0.com",
+    callback_path: "http://localhost:3000/auth/auth0/callback"
+  )
+end
