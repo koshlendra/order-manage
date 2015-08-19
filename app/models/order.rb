@@ -1,4 +1,8 @@
+require 'elasticsearch/model'
+
 class Order < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 	paginates_per 10 
  
 

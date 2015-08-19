@@ -13,7 +13,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_devise_permitted_parameters
-    binding.pry
     registration_params = [:first_name,:last_name, :email, :password, :password_confirmation,:city,:address,:pincode,:phone, :avatar]
   
     if params[:action] == 'update'

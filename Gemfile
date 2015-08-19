@@ -52,6 +52,9 @@ gem 'jquery-datatables-rails', '~> 3.3.0'
 gem 'bootstrap-colorpicker-rails', :require => 'bootstrap-colorpicker-rails',
                           :git => 'git://github.com/alessani/bootstrap-colorpicker-rails.git'
 gem 'carrierwave'
+gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+gem 'unicorn'
 # Use debugger
 gem "select2-rails"
 gem 'pry' , group: [:development, :test]
@@ -62,4 +65,7 @@ gem 'rolify'
 gem "nested_form"
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
+end
+group :development do
+  gem 'capistrano-rails', '~> 1.1.1'
 end
